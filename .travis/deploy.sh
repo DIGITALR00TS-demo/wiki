@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-rsync -av -e "sshpass -e ssh -v -p22 -oUserKnownHostsFile=/dev/null -oStrictHostKeyChecking=no" site $VDMS_USER@$VDMS_URI:/DEMO-wiki
+rsync -av -e "sshpass -e ssh -v -p22 -oUserKnownHostsFile=/dev/null -oStrictHostKeyChecking=no" -rR site/ $VDMS_USER@$VDMS_URI:/DEMO-wiki
 
 curl -Skv \
 	-X PUT \

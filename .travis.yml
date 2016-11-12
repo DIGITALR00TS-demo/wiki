@@ -5,7 +5,8 @@ before_script:
 - gem install html-proofer
 script:
 - mkdocs build --site-dir site
-- htmlproofer ./site --allow-hash-href
+# - htmlproofer ./site --allow-hash-href
+sudo: false
 branches:
   only:
   - master

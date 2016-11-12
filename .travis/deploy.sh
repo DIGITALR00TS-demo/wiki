@@ -1,7 +1,11 @@
 #!/usr/bin/env bash
 
+echo 'RSYNC'
+echo '######'
 rsync -av -e "sshpass -e ssh -v -p22 -oUserKnownHostsFile=/dev/null -oStrictHostKeyChecking=no" -rR site/ $VDMS_USER@$VDMS_URI:/DEMO-wiki
-
+echo
+echo 'PURGE'
+echo '######'
 curl -Skv \
 	-X PUT \
 	-H "Authorization: TOK:$VDMS_TOKEN" \

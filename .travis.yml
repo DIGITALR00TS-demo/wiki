@@ -1,6 +1,11 @@
 language: python
 python:
 - '3.3'
+addons:
+  apt:
+    packages:
+    - lftp
+    - sshpass
 script:
 - mkdocs build --site-dir site
 sudo: false

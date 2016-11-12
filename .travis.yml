@@ -4,12 +4,11 @@ python:
 script:
 - mkdocs build --site-dir site
 sudo: false
-branches:
-  only:
-  - master
 notifications:
   slack:
     secure: c0erbTCVfcKgqGYAl935piI7t0dm9WjZ1NWqYyp3ZXoCt0bYBj17i29ph7FAawjKqQr0SO8lhxuNPQCVMmr2CqgW1+uiIUXj+ogTyAipKoPLzhhTrl9fYLoZCmqTkIlqZHmBhzzyNXwkbu5OoiEVDSuTAhgEFimzMq12mSumrUh441ohmVO4qrY3EXr5O1meTqPMAqk+pIjZiuzmCYwicYzoMokQdYK63GaIKAvrcEC/em65wmwahHhBnPVgEPGpVpjEUOPRvhKRdmln+HdvlhoRmLVZvhwkBJ+enhgMHQUgNk/INLKjSmfyVxEGnTj93EgrNzbTRsFby5ZJTNvBDLobqME57N5hOn5hQby4ZFkY73kQSSh7Ko6AufZtNz/Kc9YD3CCA+3Bo11jFvPSnO5QNp7tJis62EfhTN9T2oFY7aYVLFL4kHlMWCyidDeWqgNjcVjI+ruSyznAv0mZLxlQ+dX1h6N5VpW5nitBU7TvWDeA8JjJweScLmaaXhxMX3vIldCaCRE1usQjGXgNb/jWhnDPmks/4OE87NX6F6iR3gBZ6CZhWQXtW5zmGDHL/qSNQe2SCel1YOk5h5ihM1JWcgKEK+jtY7mseiFnyTD7EigOaTykjp3LrE0OxZYmaAmQg2lzzxhsbq1UB7VPivYvpvRnoGIQuWa+l6PHoydk=
-after_success:
-- rsync -av -e "ssh -v -p22 -oUserKnownHostsFile=/dev/null -oStrictHostKeyChecking=no" site $VDMS_USER@$VDMS_URI:/DEMO-wiki
-- curl -Sk --verbose -X PUT -H "Authorization: TOK:$VDMS_TOKEN" -H "Content-Type:application/json" -H "Accept:application/json" -d "{ \"MediaPath\":\"http:\/\/wiki.demo.digitalr00ts.com\/\", \"MediaType\":8}" https://api.edgecast.com/v2/mcc/customers/$VDMS_ID/edge/purge
+deploy:
+  provider: script
+  script: .travis/deploy.sh
+  on:
+    branch: master

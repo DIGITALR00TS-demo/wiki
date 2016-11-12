@@ -1,8 +1,8 @@
 language: python
 python:
 - '3.3'
-before_script:
-- gem install html-proofer
+# before_script:
+# - gem install html-proofer
 script:
 - mkdocs build --site-dir site
 # - htmlproofer ./site --allow-hash-href
